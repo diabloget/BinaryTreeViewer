@@ -12,6 +12,8 @@ class BinaryTreeViewerScreen extends StatefulWidget {
 }
 
 class BinaryTreeViewerScreenState extends State<BinaryTreeViewerScreen> {
+  static List<String> postOrder = new List<String>();
+
   bool initer = true;
 
   BinaryTree tree = new BinaryTree();
@@ -153,6 +155,31 @@ class BinaryTreeViewerScreenState extends State<BinaryTreeViewerScreen> {
     ]);
   }
 
+  /*
+    void _showDialog(String) {
+    // flutter defined function
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          title: new Text("Alert Dialog title"),
+          content: new Text("Alert Dialog body"),
+          actions: <Widget>[
+            // usually buttons at the bottom of the dialog
+            new FlatButton(
+              child: new Text("Close"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+  */
+
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -226,6 +253,75 @@ class BinaryTreeViewerScreenState extends State<BinaryTreeViewerScreen> {
                 });
               },
               child: Icon(Icons.add),
+            ),
+            RaisedButton(
+              disabledColor: Colors.blueGrey,
+              disabledTextColor: Colors.black,
+              color: Colors.blueAccent,
+              textColor: Colors.white,
+              elevation: 5.0,
+              onPressed: () async {
+                postOrder.clear();
+                tree.inOrder();
+                for (String temp in postOrder) {
+                  setState(() {
+                    colorAnimator(temp);
+                  });
+                  await new Future.delayed(const Duration(milliseconds: 750));
+                  setState(() {
+                    colorAnimator2(temp);
+                  });
+
+                  //sleep(new Duration(milliseconds: 1000));
+                }
+              },
+              child: Text("inOrder"),
+            ),
+            RaisedButton(
+              disabledColor: Colors.blueGrey,
+              disabledTextColor: Colors.black,
+              color: Colors.blueAccent,
+              textColor: Colors.white,
+              elevation: 5.0,
+              onPressed: () async {
+                postOrder.clear();
+                tree.preOrder();
+                for (String temp in postOrder) {
+                  setState(() {
+                    colorAnimator(temp);
+                  });
+                  await new Future.delayed(const Duration(milliseconds: 750));
+                  setState(() {
+                    colorAnimator2(temp);
+                  });
+
+                  //sleep(new Duration(milliseconds: 1000));
+                }
+              },
+              child: Text("preOrder"),
+            ),
+            RaisedButton(
+              disabledColor: Colors.blueGrey,
+              disabledTextColor: Colors.black,
+              color: Colors.blueAccent,
+              textColor: Colors.white,
+              elevation: 5.0,
+              onPressed: () async {
+                postOrder.clear();
+                tree.postOrder();
+                for (String temp in postOrder) {
+                  setState(() {
+                    colorAnimator(temp);
+                  });
+                  await new Future.delayed(const Duration(milliseconds: 750));
+                  setState(() {
+                    colorAnimator2(temp);
+                  });
+
+                  //sleep(new Duration(milliseconds: 1000));
+                }
+              },
+              child: Text("postOrder"),
             ),
           ],
         ),

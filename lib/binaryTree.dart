@@ -44,4 +44,51 @@ class BinaryTree {
       }
     }
   }
+
+  void postOrder() {
+    printPostorderAux(this.root);
+  }
+
+  void printPostorderAux(Node node) {
+    if (node == null) return;
+
+    printPostorderAux(node.left);
+
+    printPostorderAux(node.right);
+
+    print(node.key.toString() + " ");
+
+    BinaryTreeViewerScreenState.postOrder.add(node.path);
+  }
+
+  void inOrder() {
+    printinorderAux(this.root);
+  }
+
+  void printinorderAux(Node node) {
+    if (node == null) return;
+
+    printinorderAux(node.left);
+
+    print(node.key.toString() + " ");
+
+    BinaryTreeViewerScreenState.postOrder.add(node.path);
+
+    printinorderAux(node.right);
+  }
+
+  void preOrder() {
+    printpreorderAux(this.root);
+  }
+
+  void printpreorderAux(Node node) {
+    if (node == null) return;
+
+    print(node.key.toString() + " ");
+    BinaryTreeViewerScreenState.postOrder.add(node.path);
+
+    printpreorderAux(node.left);
+
+    printpreorderAux(node.right);
+  }
 }
