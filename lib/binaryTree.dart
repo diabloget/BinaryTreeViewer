@@ -16,7 +16,7 @@ class BinaryTree {
 
   Node insertionAux(key, Node current, avoid, pos) {
     if (avoid > 5) {
-      return print("Tamaño máximo de raíz alcanzado, no se insertará el nodo");
+      print("Tamaño máximo de raíz alcanzado, no se insertará el nodo");
     } else {
       String tempPos = pos;
       if (current == null) {
