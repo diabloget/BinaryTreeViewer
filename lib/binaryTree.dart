@@ -25,11 +25,13 @@ class BinaryTree {
       } else {
         if (key < current.key) {
           tempPos += "l";
+          BinaryTreeViewerScreenState().updateValue(key, tempPos);
           current = insertionAux(key, current.left, avoid++, tempPos);
         }
 
         if (key > current.key) {
           tempPos += "r";
+          BinaryTreeViewerScreenState().updateValue(key, tempPos);
           current = insertionAux(key, current.right, avoid++, tempPos);
         }
       }
