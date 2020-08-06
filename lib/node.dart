@@ -1,13 +1,13 @@
-class Node{
+class Node {
   Node right;
   Node left;
   int key;
-  String pos;
+  String path;
 
-  Node(key, pos){
+  Node(key, path) {
     this.key = key;
     this.right = null;
     this.left = null;
-    this.pos = pos;
+    this.path = path;
   }
 }

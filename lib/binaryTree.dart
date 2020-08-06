@@ -10,32 +10,38 @@ class BinaryTree {
     this.root = null;
   }
 
-  void insertion(int key) {
-    root = insertionAux(key, root, 1, "");
+  void insert(int key) {
+    if (root != null) {
+      insertAux(key, this.root, "", 0);
+    } else {
+      root = new Node(key, "");
+      BinaryTreeViewerScreenState().updateValue(key, "");
+    }
   }
 
-  Node insertionAux(key, Node current, avoid, pos) {
+  void insertAux(int key, Node current, String path, int avoid) {
     if (avoid > 5) {
-      print("Tamaño máximo de raíz alcanzado, no se insertará el nodo");
-    } else {
-      String tempPos = pos;
-      if (current == null) {
-        current = new Node(key, tempPos);
-        BinaryTreeViewerScreenState().updateValue(key, tempPos);
-      } else {
-        if (key < current.key) {
-          tempPos += "l";
-          BinaryTreeViewerScreenState().updateValue(key, tempPos);
-          current = insertionAux(key, current.left, avoid++, tempPos);
-        }
+      return print("Tamaño máximo de raíz alcanzado, no se insertará el nodo");
+    }
 
-        if (key > current.key) {
-          tempPos += "r";
-          BinaryTreeViewerScreenState().updateValue(key, tempPos);
-          current = insertionAux(key, current.right, avoid++, tempPos);
-        }
+    if (key > current.key) {
+      path += "r";
+
+      if (current.right != null) {
+        insertAux(key, current.right, path, avoid++);
+      } else {
+        current.right = new Node(key, path);
+        BinaryTreeViewerScreenState().updateValue(key, path);
       }
-      return current;
+    } else {
+      path += "l";
+
+      if (current.left != null) {
+        insertAux(key, current.left, path, avoid++);
+      } else {
+        current.left = new Node(key, path);
+        BinaryTreeViewerScreenState().updateValue(key, path);
+      }
     }
   }
 }
